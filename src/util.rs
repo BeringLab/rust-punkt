@@ -6,20 +6,15 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use prelude::DefinesSentenceEndings;
 use token::Token;
 use trainer::TrainingData;
-use prelude::DefinesSentenceEndings;
 
 use num::Float;
 
 /// Peforms a first pass annotation on a Token.
 pub fn annotate_first_pass<P: DefinesSentenceEndings>(tok: &mut Token, data: &TrainingData) {
-  let is_split_abbrev = tok
-    .tok()
-    .rsplitn(1, '-')
-    .next()
-    .map(|s| data.contains_abbrev(s))
-    .unwrap_or(false);
+  let is_split_abbrev = data.contains_abbrev(tok.tok());
 
   if tok.tok().len() == 1 && P::is_sentence_ending(&tok.tok().chars().nth(0).unwrap()) {
     tok.set_is_sentence_break(true);
