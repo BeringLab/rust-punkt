@@ -779,40 +779,40 @@ fn test_data_load_from_json_test() {
   assert!(data.contains_collocation("##number##", "corrections"));
 }
 
-#[cfg(test)]
-macro_rules! bench_trainer(
-  ($name:ident, $doc:expr) => (
-    #[bench] fn $name(b: &mut ::test::Bencher) {
-      b.iter(|| {
-        let mut data = TrainingData::new();
-        let trainer: Trainer<::prelude::Standard> = Trainer::new();
+// #[cfg(test)]
+// macro_rules! bench_trainer(
+//   ($name:ident, $doc:expr) => (
+//     #[bench] fn $name(b: &mut ::test::Bencher) {
+//       b.iter(|| {
+//         let mut data = TrainingData::new();
+//         let trainer: Trainer<::prelude::Standard> = Trainer::new();
 
-        trainer.train($doc, &mut data);
-      })
-    }
-  )
-);
+//         trainer.train($doc, &mut data);
+//       })
+//     }
+//   )
+// );
 
-#[cfg(test)]
-bench_trainer!(
-  bench_trainer_short,
-  include_str!("../test/raw/sigma-wiki.txt")
-);
+// #[cfg(test)]
+// bench_trainer!(
+//   bench_trainer_short,
+//   include_str!("../test/raw/sigma-wiki.txt")
+// );
 
-#[cfg(test)]
-bench_trainer!(
-  bench_trainer_medium,
-  include_str!("../test/raw/npr-article-01.txt")
-);
+// #[cfg(test)]
+// bench_trainer!(
+//   bench_trainer_medium,
+//   include_str!("../test/raw/npr-article-01.txt")
+// );
 
-#[cfg(test)]
-bench_trainer!(
-  bench_trainer_long,
-  include_str!("../test/raw/the-sayings-of-confucius.txt")
-);
+// #[cfg(test)]
+// bench_trainer!(
+//   bench_trainer_long,
+//   include_str!("../test/raw/the-sayings-of-confucius.txt")
+// );
 
-#[cfg(test)]
-bench_trainer!(
-  bench_trainer_very_long,
-  include_str!("../test/raw/pride-and-prejudice.txt")
-);
+// #[cfg(test)]
+// bench_trainer!(
+//   bench_trainer_very_long,
+//   include_str!("../test/raw/pride-and-prejudice.txt")
+// );

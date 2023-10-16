@@ -719,75 +719,75 @@ fn sentence_tokenizer_issue_8_test() {
   let _: Vec<_> = SentenceTokenizer::<::params::Standard>::new(doc, &data).collect();
 }
 
-#[cfg(test)]
-macro_rules! bench_word_tokenizer(
-  ($name:ident, $doc:expr) => (
-    #[bench] fn $name(b: &mut ::test::Bencher) {
-      b.iter(|| {
-        let t: WordTokenizer<::prelude::Standard> = WordTokenizer::new($doc);
-        let _: Vec<Token> = t.collect();
-      })
-    }
-  )
-);
+// #[cfg(test)]
+// macro_rules! bench_word_tokenizer(
+//   ($name:ident, $doc:expr) => (
+//     #[bench] fn $name(b: &mut ::test::Bencher) {
+//       b.iter(|| {
+//         let t: WordTokenizer<::prelude::Standard> = WordTokenizer::new($doc);
+//         let _: Vec<Token> = t.collect();
+//       })
+//     }
+//   )
+// );
 
-#[cfg(test)]
-bench_word_tokenizer!(
-  word_tokenizer_bench_short,
-  include_str!("../test/raw/sigma-wiki.txt")
-);
+// #[cfg(test)]
+// bench_word_tokenizer!(
+//   word_tokenizer_bench_short,
+//   include_str!("../test/raw/sigma-wiki.txt")
+// );
 
-#[cfg(test)]
-bench_word_tokenizer!(
-  word_tokenizer_bench_medium,
-  include_str!("../test/raw/npr-article-01.txt")
-);
+// #[cfg(test)]
+// bench_word_tokenizer!(
+//   word_tokenizer_bench_medium,
+//   include_str!("../test/raw/npr-article-01.txt")
+// );
 
-#[cfg(test)]
-bench_word_tokenizer!(
-  word_tokenizer_bench_long,
-  include_str!("../test/raw/the-sayings-of-confucius.txt")
-);
+// #[cfg(test)]
+// bench_word_tokenizer!(
+//   word_tokenizer_bench_long,
+//   include_str!("../test/raw/the-sayings-of-confucius.txt")
+// );
 
-#[cfg(test)]
-bench_word_tokenizer!(
-  word_tokenizer_bench_very_long,
-  include_str!("../test/raw/pride-and-prejudice.txt")
-);
+// #[cfg(test)]
+// bench_word_tokenizer!(
+//   word_tokenizer_bench_very_long,
+//   include_str!("../test/raw/pride-and-prejudice.txt")
+// );
 
-#[cfg(test)]
-macro_rules! bench_sentence_tokenizer(
-  ($name:ident, $doc:expr) => (
-    #[bench] fn $name(b: &mut ::test::Bencher) {
-      let doc = $doc;
+// #[cfg(test)]
+// macro_rules! bench_sentence_tokenizer(
+//   ($name:ident, $doc:expr) => (
+//     #[bench] fn $name(b: &mut ::test::Bencher) {
+//       let doc = $doc;
 
-      b.iter(|| {
-        let mut data = TrainingData::new();
+//       b.iter(|| {
+//         let mut data = TrainingData::new();
 
-        train_on_document(&mut data, doc);
+//         train_on_document(&mut data, doc);
 
-        let iter: SentenceTokenizer<::prelude::Standard> =
-          SentenceTokenizer::new(doc, &mut data);
-        let _: Vec<&str> = iter.collect();
-      })
-    }
-  )
-);
+//         let iter: SentenceTokenizer<::prelude::Standard> =
+//           SentenceTokenizer::new(doc, &mut data);
+//         let _: Vec<&str> = iter.collect();
+//       })
+//     }
+//   )
+// );
 
-#[cfg(test)]
-bench_sentence_tokenizer!(
-  bench_sentence_tokenizer_train_on_document_short,
-  include_str!("../test/raw/sigma-wiki.txt")
-);
+// #[cfg(test)]
+// bench_sentence_tokenizer!(
+//   bench_sentence_tokenizer_train_on_document_short,
+//   include_str!("../test/raw/sigma-wiki.txt")
+// );
 
-#[cfg(test)]
-bench_sentence_tokenizer!(
-  bench_sentence_tokenizer_train_on_document_medium,
-  include_str!("../test/raw/npr-article-01.txt")
-);
+// #[cfg(test)]
+// bench_sentence_tokenizer!(
+//   bench_sentence_tokenizer_train_on_document_medium,
+//   include_str!("../test/raw/npr-article-01.txt")
+// );
 
-#[cfg(test)]
-bench_sentence_tokenizer!(
-  bench_sentence_tokenizer_train_on_document_long,
-  include_str!("../test/raw/pride-and-prejudice.txt")
-);
+// #[cfg(test)]
+// bench_sentence_tokenizer!(
+//   bench_sentence_tokenizer_train_on_document_long,
+//   include_str!("../test/raw/pride-and-prejudice.txt")
+// );

@@ -137,8 +137,6 @@
 //! }
 //! ```
 
-#![cfg_attr(test, feature(test))]
-#![feature(proc_macro_hygiene)]
 #![warn(missing_docs)]
 
 extern crate freqdist;
@@ -146,25 +144,25 @@ extern crate num;
 extern crate phf;
 extern crate rustc_serialize;
 #[cfg(test)]
-extern crate test;
 #[cfg(test)]
 extern crate walkdir;
 
-mod trainer;
-mod util;
+mod prelude;
 mod token;
 mod tokenizer;
-mod prelude;
+mod trainer;
+mod util;
 
-pub use trainer::{Trainer, TrainingData};
 pub use tokenizer::{SentenceByteOffsetTokenizer, SentenceTokenizer};
+pub use trainer::{Trainer, TrainingData};
 
 /// Contains traits for configuring all tokenizers, and the trainer. Also
 /// contains default parameters for tokenizers, and the trainer.
 pub mod params {
-  pub use prelude::{DefinesInternalPunctuation, DefinesNonPrefixCharacters,
-                    DefinesNonWordCharacters, DefinesPunctuation, DefinesSentenceEndings, Set,
-                    Standard, TrainerParameters};
+  pub use prelude::{
+    DefinesInternalPunctuation, DefinesNonPrefixCharacters, DefinesNonWordCharacters,
+    DefinesPunctuation, DefinesSentenceEndings, Set, Standard, TrainerParameters,
+  };
 }
 
 #[cfg(test)]
@@ -172,8 +170,8 @@ fn get_test_scenarios(dir_path: &str, raw_path: &str) -> Vec<(Vec<String>, Strin
   #![allow(unused_must_use)]
 
   use std::fs;
-  use std::path::Path;
   use std::io::Read;
+  use std::path::Path;
 
   use walkdir::WalkDir;
 
